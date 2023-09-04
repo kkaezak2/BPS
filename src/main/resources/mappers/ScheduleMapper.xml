@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.ScheduleMapper">
+
+	<insert id="insert" parameterType="ScheduleDTO">
+		INSERT INTO
+		schedule(id,writer_id,title,start,end)
+		VALUES
+		(#{id},#{writerId},#{title},#{start},DATE_ADD(#{end}, INTERVAL 1 DAY))
+	</insert>
+
+
+	<select id="selectAllByWriterId" parameterType="String"
+		resultType="ScheduleDTO">
+		SELECT
+		id, writer_id, title, start, end
+		FROM
+		schedule
+		INNER JOIN employee
+		ON schedule.writer_id = employee.username
+		WHERE
+		schedule.writer_id = #{username}
+	</select>
+
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM
+		schedule
+		WHERE
+		id = ${id}
+	</delete>
+
+</mapper>

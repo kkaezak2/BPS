@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+/* Full-width input fields */
+.r_input, .r_input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.r_input :focus, .r_input:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+/* Set a style for all buttons */
+button {
+  background-color: #ffe03a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #000000;
+}
+
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+.signupbtn{
+	color:#000000;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+ @media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  } 
+}
+ link[rel="icon"] {
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    font-weight: bolder;
+  }
+
+body .btn:hover {
+background-color: #ffe03a;
+
+}
+#div_body{
+	 padding-left: 50px;
+	 padding-right: 50px;
+}

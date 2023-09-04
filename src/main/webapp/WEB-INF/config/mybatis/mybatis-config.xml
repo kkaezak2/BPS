@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org/DID Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- _가 들어간 필드명을 낙타표기법으로 변환 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+
+	<typeAliases>
+		<typeAlias alias="employeeDTO" type="com.bit.model.EmployeeDTO" />
+
+		<typeAlias alias="customerDTO" type="com.bit.model.CustomerDTO" />
+
+		<typeAlias alias="contractDTO" type="com.bit.model.ContractDTO" />
+
+		<typeAlias alias="autoPaymentDTO" type="com.bit.model.AutoPaymentDTO" />
+
+		<typeAlias alias="allPaymentDTO" type="com.bit.model.AllPaymentDTO" />
+
+		<typeAlias alias="accountDTO" type="com.bit.model.AccountDTO" />
+
+		<typeAlias alias="refundDTO" type="com.bit.model.RefundDTO" />
+
+		<typeAlias alias="scheduleDTO" type="com.bit.model.ScheduleDTO" />
+		
+		<typeAlias alias="noticeDTO" type="com.bit.model.NoticeDTO" />
+		
+		<typeAlias alias="attachmentDTO" type="com.bit.model.AttachmentDTO" />
+
+		<typeAlias alias="alarmDTO" type="com.bit.model.AlarmDTO" />
+	</typeAliases>
+
+
+
+	<mappers>
+		<mapper resource="mappers/EmployeeMapper.xml" />
+		<mapper resource="mappers/CustomerMapper.xml" />
+		<mapper resource="mappers/ContractMapper.xml" />
+		<mapper resource="mappers/AutoPaymentMapper.xml" />
+		<mapper resource="mappers/AllPaymentMapper.xml" />
+		<mapper resource="mappers/AccountMapper.xml" />
+		<mapper resource="mappers/RefundMapper.xml" />
+		<mapper resource="mappers/ScheduleMapper.xml" />
+		<mapper resource="mappers/NoticeMapper.xml" />
+		<mapper resource="mappers/AttachmentMapper.xml" />
+		<mapper resource="mappers/AlarmMapper.xml" />
+
+	</mappers>
+
+
+</configuration>

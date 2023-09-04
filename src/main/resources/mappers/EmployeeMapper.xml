@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.EmployeeMapper">
+
+	<select id="auth" parameterType="employeeDTO"
+		resultType="employeeDTO">
+		SELECT * FROM
+		`employee`
+		WHERE `username` = #{username}
+		AND
+		`password` = #{password}
+	</select>
+
+	<select id="selectOneByUsername" parameterType="employeeDTO"
+		resultType="employeeDTO">
+		SELECT * FROM `employee`
+		WHERE `username` = #{username}
+	</select>
+
+
+	<insert id="register" parameterType="employeeDTO">
+		INSERT INTO
+		`employee`(`username`, `name`, `password`, `team_code`,`team_name`)
+		VALUES(#{username}, #{name}, #{password}, #{teamCode}, #{teamName})
+	</insert>
+
+
+
+	<update id="update" parameterType="employeeDTO">
+		UPDATE `employee`
+		SET
+		`password` =
+		#{password}
+		WHERE `username` = #{username}
+	</update>
+
+
+	<select id="selectAll" resultType="employeeDTO">
+		SELECT * FROM `employee`
+		LIMIT
+		${startRow}, ${size}
+
+	</select>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM
+		`premium`.`employee`
+		WHERE `username`
+		= #{username}
+	</delete>
+
+	<select id="selectOne" parameterType="String"
+		resultType="employeeDTO">
+		SELECT * FROM `premium`.`employee`
+		WHERE
+		`employee`.`username` = #{username}
+	</select>
+
+
+	<!-- 직원등급 수정 -->
+	<update id="updateGrade" parameterType="employeeDTO">
+		UPDATE `employee` SET
+
+		`team_code` = #{teamCode},
+		`team_name` = #{teamName},
+
+		`grade` = #{grade}
+		WHERE `username` = #{username}
+	</update>
+
+
+	<select id="count" resultType="integer">
+		SELECT COUNT(*) FROM employee
+	</select>
+
+
+
+	<select id="search" resultType="employeeDTO"
+		parameterType="String">
+		select * from employee
+
+		WHERE name LIKE CONCAT('%',
+		#{search}, '%')
+		or team_name LIKE CONCAT('%', #{search}, '%')
+		or grade
+		LIKE CONCAT('%', #{search}, '%')
+		or username LIKE CONCAT('%',
+		#{search}, '%')
+		ORDER BY
+		username,
+		team_code
+
+	</select>
+
+
+	<!-- 직원비밀번호 변경 -->
+	<update id="updatePassword" parameterType="employeeDTO">
+		UPDATE `employee`
+		SET
+		`password` =
+		#{password}
+		WHERE `username` = ${username}
+	</update>
+
+	<!-- 결재자 선택 -->
+	<select id="selectApprover" resultType="employeeDTO">
+		SELECT * FROM employee
+		WHERE
+		grade = '팀장'
+	</select>
+
+
+
+</mapper>

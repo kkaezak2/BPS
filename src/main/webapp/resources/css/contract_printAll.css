@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+#startDate, #endDate {
+	width: 120px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	text-align: center;
+}
+
+#count {
+	width: 69px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	text-align: center;
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+.accountselect {
+	margin-top: 0px !important;
+}
+
+#div_body {
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+#ssn, #find_number {
+	width: auto;
+}
+
+#col_customer_report {
+	height: 48px;
+	margin-bottom: 0px;
+}
+
+#span_customer, #span_customer2 {
+	margin: auto;
+}
+
+#div_contract_header {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#row_withdraw_header {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#div_row_withdrawl {
+	border: none;
+}
+#div_account_clone{
+	margin-top: 11px;
+}

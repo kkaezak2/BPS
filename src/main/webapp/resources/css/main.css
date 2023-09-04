@@ -1,0 +1,248 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+body .form-check-input:checked {
+	background-color: #000000;
+	border-color: #000000;
+}
+
+body .form-check-input:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20%;
+	opacity: 25%;
+	margin-top: 10%;
+}
+
+/* 일요일 날짜 빨간색 */
+.fc-day-sun a {
+	color: #ff4299;
+	text-decoration: none;
+}
+
+/* 토요일 날짜 파란색 */
+.fc-day-sat a {
+	color: #1f9ff2;
+	text-decoration: none;
+}
+
+.fc .fc-button-primary {
+	background-color: #fff;
+	border-color: #ffe03a;
+	color: #000000;
+}
+
+nav {
+	position: relative;
+	 z-index: 2; 
+}
+
+/* 스크롤관련 시작 */
+body {
+	overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px #e2e2e2;;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	height: 20%;
+	background: #ffe03a;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #fded96;
+}
+/* 스크롤관련 끝 */
+.fc .fc-button-primary:disabled {
+	background-color: #fded96;
+	border-color: #fded96;
+	color: #000000;
+}
+
+:root {
+	--fc-button-hover-bg-color: #fff7cd;
+	--fc-button-hover-border-color: #fff7cd;
+	--fc-button-active-bg-color: #fff7cd;
+	--fc-button-active-border-color: #fff7cd;
+	--fc-border-color: #e2e2e2;
+	--fc-button-text-color: #000000;
+	--fc-event-border-color: #ffe03a;
+	--fc-event-bg-color: #ffffff;
+}
+
+.fc .fc-button-primary:focus {
+	/* box-shadow: rgba(255, 224, 58, 0.5) 0px 0px 0px 0.2rem; */
+	box-shadow: none;
+}
+
+.fc-button-primary:focus-visible {
+	box-shadow: rgba(255, 224, 58, 0.5) 0px 0px 0px 0.2rem;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: auto 770px;
+	grid-gap: 10px;
+	padding: 10px;
+}
+
+.grid-container>div {
+	padding: 10px 0;
+}
+
+.item1 {
+	grid-row-end: span 2;
+	width: 100%;
+}
+
+#addSchedule {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* 공지사항스크롤여부 */
+.scroll {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x:hidden;
+}
+
+#div_body {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#item1_card_border {
+	height: 100vh;
+}
+
+#item1_card_header {
+	background-color: #fff7cd;
+}
+
+#item2_card_border {
+	height: 30vh;
+}
+
+#item2_card_header {
+	background-color: #fff7cd;
+}
+
+#item3_card_border {
+	height: 67vh;
+}
+
+#item3_card_header {
+	background-color: #fff7cd;
+	display: flex;
+	justify-content: space-between;
+}
+
+#item3_modal_notice {
+	display: flex;
+	align-items: center;
+}
+
+h2 {
+	color: black;
+}
+
+.fc .fc-toolbar-title {
+	font-size: 1.75em;
+	margin: 0px;
+	color: black;
+}
+
+#titleForAddSchedule, #titleForNotice, #titleForAddNotice,
+	#titleForUpdatenotice, #titleForAskPermit {
+	color: black;
+}
+#titleForAskPermit{
+	flex:none;
+	
+}
+
+#forAskCount {
+	color: #FF0000;
+}
+
+
+.ck-editor__editable {
+	min-height: 500px;
+}
+
+
+.chat-popup2 {
+    display: none;
+    position: fixed;
+    top: 250px;
+    left: -200px; /* 초기 위치 설정 */
+    padding: 10px;
+    background-color: transparent;
+    animation: chat-popup-animation 1s forwards; /* 애니메이션 적용 */
+}
+
+#chatImage2{
+	width: 200px;
+	
+}
+
+@keyframes chat-popup-animation { 
+    0% {
+        left: -200px;
+    }
+    100% {
+        left: 0px;
+    }
+}
+
+#centered-image {
+ 
+  justify-content: center;
+  align-items: center;
+}
+
+#centered-image img{
+	width:450px;
+}
+	
+	
+	
+	

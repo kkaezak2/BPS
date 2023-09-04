@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+#div_body {
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+#div_contractHeader {
+	padding-bottom: 10px;
+	padding-top: 10px;
+	
+}
+/* 스크롤관련 시작 */
+body {
+	overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px #e2e2e2;;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	height: 20%;
+	background: #ffe03a;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #fded96;
+}
+/* 스크롤관련 끝 */
+.refund-scroll {
+	max-height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}

@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+.clone .col-1 {
+	margin: auto;
+}
+
+.clone .col-2 {
+	margin: auto;
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+.customform {
+	border: #ffffff;
+}
+
+#div_body {
+	margin-left: 16px;
+	margin-right: 16px;
+}
+
+#ssn, #input_number {
+	width: auto;
+}
+
+#col2_customerName {
+	height: 48px;
+	margin-bottom: 0px;
+}
+
+#span_customerName, #span_customerName2 {
+	margin: auto;
+}
+
+#div_contract_header {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#addAccountModal {
+	z-index: 999;
+	padding: 20px;
+}
+
+.imgradio {
+	width: 40px;
+	height: 40px;
+}
+
+body {
+	overflow-x: hidden;
+}
+/* 스크롤관련 시작 */
+body {
+	overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px #e2e2e2;;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	height: 20%;
+	background: #ffe03a;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #fded96;
+}
+/* 스크롤관련 끝 */
+.label_with_image {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+
+.label_with_image .imgradio {
+	margin-bottom: 5px; /* 이미지와 텍스트 사이 간격 조절 */
+}
+
+.btn {
+  background-color: white; /* 여기에 원하는 배경색을 지정 */
+  color: black; /* 텍스트 색상도 변경하여 가시성을 유지 */
+  border-color: #e2e2e2;
+}
+.btn-check+.btn:hover {
+    border-color: #000000;
+}
+/* 해당 요소가 포커스를 받을 때의 스타일 변경 */
+.btn-check:focus + .btn.label_with_image {
+  border-color: black;
+  border: 3px solid black;
+  
+}
+
+.combined-scroll{
+	max-height: 500px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}

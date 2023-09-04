@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.AutoPaymentMapper">
+
+	<select id="selectAll" parameterType="String"
+		resultType="AutoPaymentDTO">
+		SELECT * FROM `auto_payment`
+		WHERE `ssn` = #{ssn}
+		ORDER BY `modify_date` DESC;
+	</select>
+
+	<select id="selectOne" parameterType="int"
+		resultType="AutoPaymentDTO">
+		SELECT * FROM `auto_payment`
+		WHERE `number` = #{number}
+		ORDER BY `modify_date` DESC;
+	</select>
+
+
+	<!-- 수정 -->
+	<update id="update" parameterType="AutoPaymentDTO">
+		UPDATE `auto_payment` SET
+		`status` = #{status}
+		WHERE `number` = ${number}
+	</update>
+
+
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO `auto_payment` (`number`, `ssn`, `payment_method`,
+		`account_date`, `bank`, `account`, `account_option`, `depositor`,
+		`modify_date`)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(
+			#{item.number},
+			(SELECT `ssn` FROM `contract` WHERE `number` = #{item.number}),
+			#{item.paymentMethod},
+			#{item.accountDate},
+			#{item.bank},
+			#{item.account},
+			(IF(#{item.paymentMethod} = '자동이체', '등록', '해지')),
+			#{item.depositor},
+			NOW()
+			)
+		</foreach>
+	</insert>
+
+
+</mapper>   

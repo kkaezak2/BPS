@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.AllPaymentMapper">
+
+
+	<insert id="insert" parameterType="arrayList"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `all_payment`(number, paid_date,
+		count, process_date, ssn, name, team_name, username, bank, account,
+		depositor) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.number},#{item.paidDate},#{item.count}, NOW(),
+			#{item.ssn}, #{item.name}, #{item.teamName}, #{item.username}, #{item.bank},
+			${item.account},
+			#{item.depositor})
+		</foreach>
+	</insert>
+
+
+	<select id="selectAllByContract" parameterType="HashMap"
+		resultType="allPaymentDTO">
+		select `all_payment`.*,
+		`contract`.`product_name`, `contract`.`contractor`,
+		`contract`.`premium`,
+		`contract`.`status`, `contract`.`final_date`
+		from
+		`all_payment`
+		inner join `contract`
+		on `all_payment`.`number` =
+		`contract`.`number`
+		where `all_payment`.`number` = ${number}
+		and `all_payment`.`payment_status` = #{paymentStatus}
+		order by
+		`all_payment`.`paid_date` desc
+	</select>
+
+
+	<!-- 보험료반송:납입내역 조회(정상건만) -->
+	<select id="selectAll" parameterType="int"
+		resultType="allPaymentDTO">
+		select `all_payment`.*,
+		`contract`.`product_name`,
+		`contract`.`contractor`,
+		`contract`.`premium`,
+		`contract`.`status`,
+		`contract`.`final_date`
+		from
+		`all_payment`
+		inner join `contract`
+		on
+		`all_payment`.`number` =
+		`contract`.`number`
+		where
+		`all_payment`.`number` = ${number}
+		and `payment_status`= '정상'
+		order by
+		`all_payment`.`paid_date`
+		desc
+	</select>
+
+	<update id="updateConfirm" parameterType="allPaymentDTO">
+		UPDATE `all_payment`
+		SET
+		`payment_status` = #{paymentStatus}
+		WHERE `id` IN (
+		SELECT `all_payment_id` FROM `refund`
+		WHERE `all_payment_id` = #{id}
+		)
+	</update>
+
+	<!-- 납입회차 업데이트 -->
+	<update id="updateCount" parameterType="allPaymentDTO">
+		UPDATE `all_payment` ap
+		SET
+		`count` = (SELECT PERIOD_DIFF(EXTRACT(YEAR_MONTH FROM ap.paid_date),
+		EXTRACT(YEAR_MONTH FROM c.date)) + 1
+		FROM contract c
+		WHERE number = ${number})
+	</update>
+
+<!-- 대시보드영역 -->
+	<!-- 일자별 처리건수 count -->
+	<select id="countByDate" resultType="allPaymentDTO">
+		SELECT process_date, COUNT(id) AS payment_count
+		FROM all_payment
+		GROUP BY process_date;
+	</select>
+
+	<!-- 인별 처리건수 count -->
+	<select id="countByName" resultType="allPaymentDTO">
+		SELECT username, name, COUNT(id) AS payment_count
+		FROM all_payment
+		GROUP BY username, name;
+	</select>
+
+	<!-- 납입방법별 count -->
+	<select id="countByMethod" resultType="allPaymentDTO">
+		SELECT payment_method, COUNT(id) AS payment_count
+		FROM all_payment
+		GROUP BY payment_method;
+	</select>
+	
+	<!-- 상품별 계속보험료 -->
+   <select id="premiumByProduct" resultType="allPaymentDTO">
+      SELECT
+      c.product_name,
+      SUM(c.premium) AS premium
+      FROM
+      all_payment AS ap
+      INNER JOIN
+      contract AS c
+      ON ap.number = c.number
+      WHERE
+      ap.payment_status = '정상'
+      AND ap.paid_date >= DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)
+      GROUP BY c.product_name
+      ORDER BY premium DESC;
+   </select>
+
+<!-- 월별 계속보험료 -->
+ <select id="premiumByMonth" parameterType="map" resultType="allPaymentDTO">
+      SELECT
+      DATE_FORMAT(ap.paid_date, '%Y-%m') AS month,
+      SUM(c.premium) AS premium
+      FROM
+      all_payment AS ap
+      INNER JOIN
+      contract AS c ON ap.number = c.number
+      WHERE
+      ap.payment_status = '정상'
+      AND (ap.paid_date BETWEEN #{startDate} AND #{endDate})
+      
+      GROUP BY month
+      ORDER BY month ASC
+   </select>
+
+</mapper> 
+

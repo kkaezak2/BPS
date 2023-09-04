@@ -1,0 +1,257 @@
+@charset "UTF-8";
+
+* {
+	list-style: none;
+	color: black;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+#menu {
+	position: relative;
+	/* z-index: 99; */
+	background-color: white;
+	height: 50px;
+	text-align: center;
+	color: black;
+	width: auto;
+}
+
+[class*="main"] {
+	background-color: white;
+	border-radius: 5px 5px 5px 5px;
+}
+
+[class*="main"] ul {
+	border-radius: 5px 5px 5px 5px;
+	/* border: 1px solid #57523E; */
+}
+
+.main1 {
+	padding-left: 0px;
+	height: 100%;
+	/* width: 1300px; */
+	margin: 0 auto;
+	display: inline-block;
+	width: 100%;
+}
+
+.header {
+	border-top: 5px solid #ffe03a;
+}
+
+.main1>li {
+	float: left;
+	width: 13%;
+	line-height: 50px;
+	position: relative;
+}
+
+.main1>li:hover .main2 {
+	left: 0;
+}
+
+.main1>li a {
+	/* display: block; */
+	white-space: nowrap;
+	
+}
+
+.main1>li a:hover {
+	color: #ffe03a;
+	
+}
+
+.main2 {
+	/* width: 110%; */
+	position: absolute;
+	top: 50px;
+	left: -9999px;
+	width: 100%;
+	padding: 0px;
+	color: black;
+	text-align: center;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+}
+
+.main1>li:hover {
+	border-top: 8px solid #ffe03a;
+}
+
+.main2 li:hover {
+	border-left: 10px solid #ffe03a;
+	background-color: #ffffff;
+}
+
+.main2>li {
+	position: relative;
+}
+
+.main2>li:hover .main3 {
+	left: 100%;
+}
+
+.main2>li a, .main3>li a {
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.main3 {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	left: -9999px;
+	padding: 0px;
+}
+
+nav {
+	margin-top: 20px;
+	color: black;
+}
+h3{
+	color: black;
+}
+.modal-backdrop {
+	 /* z-index: 2;  */
+}
+
+/* 반응형 디자인을 위한 스타일 */
+@media screen and (max-width: 768px) {
+	.main1>li {
+		width: 100%;
+	}
+	.main2 {
+		width: 100%;
+		left: 0;
+	}
+	.main3 {
+		left: 100%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.main1 {
+		display: block; /* 메뉴 항목이 모바일 화면에서 한 줄로 표시되도록 수정 */
+	}
+	.main1>li {
+		width: 100%; /* 메뉴 항목의 너비를 100%로 조절하여 한 줄로 표시되도록 수정 */
+	}
+	.main2 {
+		width: 100%; /* 하위 메뉴 항목도 100% 너비로 수정 */
+	}
+	.main3 {
+		left: 100%;
+	}
+}
+
+.swal2-icon-content {
+	color: #f8bb86;
+}
+
+.swal2-confirm .swal2-styled {
+	color: #ffffff;
+	background-color: #000;
+	box-shadow: none;
+	border: none;
+}
+
+#li_logo {
+	width: 50%;
+	max-width: 150px;
+	border-radius: 0px 80px 0px 80px;
+	background-color: #ffe03a;
+	padding: 0px;
+}
+
+#li_premiumAuto, #li_premiumPush, #li_premiumReject {
+	border: none;
+}
+
+#li_pwdChange,
+#li_alert {
+	border: none;
+	/* width:100px; */
+}
+
+#div_loginname {
+	padding-right: 20px;
+}
+
+#i_logout {
+	color: #000000;
+}
+#titleForPwd{
+	color: #000000;
+}
+.dashboard-link {
+    cursor: pointer; /* 커서 모양을 포인터로 설정합니다. */
+}
+ 
+#alarmDiv{
+  width: auto; 
+  background-color: transparent; 
+  color: black; 
+  text-align: center;
+  border:none;
+  padding: 5px; 
+  position: fixed; 
+  z-index: 1; 
+  right: 1px; 
+  top: 32px;
+  font-size: 15px;
+} 
+
+#alarmLi{
+	border-radius: 5px;
+	background-color: #333;
+	padding:5px;
+	padding-left:5px;
+	padding-right:5px;
+	color: #ffffff;
+}
+
+ 
+@keyframes shake{
+      0%{
+          transform: rotate(0deg);
+        }
+        10%{
+          transform: rotate(45deg);
+        }
+        20%{
+          transform: rotate(-45deg);
+        }
+        30%{
+          transform: rotate(30deg);
+        }
+        40%{
+          transform: rotate(-30deg);
+        }
+        50%{
+          transform: rotate(10deg);
+        }
+        60%{
+          transform: rotate(-10deg);
+        }
+        70%{
+          transform: rotate(0deg);
+        }
+        100%{
+          transform: rotate(0deg);
+        }
+    }
+
+#alarmI {
+  transform-origin: 50% 0%;
+      animation-name: shake;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-delay: 0.5s;
+}
+#mainlogotitle{
+	letter-spacing: 2px;
+	font-weight: bolder;
+}

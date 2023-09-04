@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+
+<!-- @Autowired 연결되는 역할 -->
+  <context:component-scan base-package="com.bit.service" />
+   <context:component-scan base-package="com.bit.security"/>
+ 
+  <context:component-scan base-package="com.bit.handler" />
+
+
+	<!-- 뷰와 상관없는, 관리해야 하는 것들 기재 -->
+	<!-- 드라이버매니저 데이터소스 만듦 -->
+	<beans:bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/premium" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="!******r" />
+	</beans:bean>
+	
+	
+	<!-- AlarmHandler alarmHandler = new AlarmHandler();. alarmHandler.setAlarmDTO(alarmDTO) -->
+ <beans:bean id="alarmHandler"
+      class="com.bit.handler.AlarmHandler">
+   </beans:bean>
+
+
+
+   <websocket:handlers>
+      <websocket:mapping handler="alarmHandler"
+         path="/ws-alarm" />
+      <websocket:handshake-interceptors>
+         <beans:bean
+            class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+      </websocket:handshake-interceptors>
+   </websocket:handlers>
+	
+	
+	
+	<!-- sqlSessionFactory하는 객체만듦, 데이터객체소스는 위에 우리가 만든것이 들어감 -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<beans:property name="dataSource" ref="datasource" />
+	
+	<!-- 마이바티스 설정을 저장하는 xml파일을 만들것임 -->
+	<beans:property name="configLocation" value="/WEB-INF/config/mybatis/mybatis-config.xml" />
+	</beans:bean>
+	
+<!-- 우리가 최종적으로 사용할 붕어빵 -->
+<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+
+<!-- 생성자에 들어가는 파라미터, 생성자를 통해서 DI를 하는,, -->
+<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+</beans:bean>
+
+
+
+<!-- navermail설정(지헌) -->
+   <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+    <beans:property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
+    <beans:property name="port" value="465"/> <!-- 메이서버 포트번호 -->
+    <beans:property name="username" value="g***7@naver.com"/> <!-- 자신의 이메일 아이디 -->
+    <beans:property name="password" value="a*******A"/> <!-- 자신의 비밀번호 -->
+      <!-- 보안연결 SSL과 관련된 설정(지헌) -->
+    <beans:property name="javaMailProperties">
+     <beans:props>
+     <beans:prop key="mail.smtp.auth">true</beans:prop>
+     <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+     <beans:prop key="mail.smtps.checkserveridentity">true</beans:prop>
+     <beans:prop key="mail.smtps.ssl.trust">*</beans:prop>
+     <beans:prop key="mail.debug">false</beans:prop>
+     <beans:prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</beans:prop>
+     </beans:props>
+    </beans:property>
+   </beans:bean>
+   
+   
+  </beans:beans>

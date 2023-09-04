@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+body .form-check-input:checked {
+	background-color: #000000;
+	border-color: #ffe03a;
+}
+
+body .form-check-input:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+
+#div_body {
+	padding-left: 16px;
+	padding-right:16px;
+}
+
+#div_contractHeader {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}

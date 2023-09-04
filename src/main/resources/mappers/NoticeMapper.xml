@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.NoticeMapper">
+
+
+	<select id="selectAll" resultType="noticeDTO">
+		SELECT * FROM notice
+		ORDER BY `id` DESC
+	</select>
+
+
+	<insert id="insert" parameterType="noticeDTO" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO
+		`notice`(`id`,`writer_id`, `writer`,
+		`title`,`content`,`entry_date`,`modify_date`)
+		VALUES(#{id}, #{writerId}, #{writer}, #{title}, #{content}, now(), now())
+		
+	</insert>
+
+
+	<update id="update" parameterType="noticeDTO">
+		UPDATE `notice` SET
+
+		`title` =
+		#{title},
+		`content` = #{content},
+
+		`modify_date` = now()
+		WHERE `id` =
+		${id}
+	</update>
+
+
+	<select id="selectOne" parameterType="integer"
+		resultType="noticeDTO">
+		SELECT * FROM notice
+		WHERE
+		id = ${id}
+
+	</select>
+
+
+	<delete id="delete" parameterType="integer">
+		DELETE FROM
+		`premium`.`notice`
+		WHERE `id`
+		= ${id}
+	</delete>
+
+
+</mapper>

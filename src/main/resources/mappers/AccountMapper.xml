@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.AccountMapper">
+
+	<!-- 계좌등록 -->
+	<insert id="register" parameterType="AccountDTO">
+		INSERT INTO
+		account(account,depositor,bank,depositor_ssn, ssn)
+		VALUES
+		(#{account},
+		#{depositor}, #{bank}, #{depositorSsn},#{ssn})
+	</insert>
+
+	<!-- 계좌리스트 -->
+	<select id="selectAll" parameterType="String"
+		resultType="AccountDTO">
+		SELECT * FROM `account`
+		WHERE `ssn` = #{ssn}
+	</select>
+
+
+	<!-- 증서번호로 계좌정보 불러오기 남순정 매니저님 -->
+	<select id="selectOne" parameterType="int"
+		resultType="AccountDTO">
+		SELECT `account`.*
+		FROM `account`
+		INNER JOIN `contract`
+		ON
+		`account`.`ssn` = `contract`.`ssn`
+		WHERE `contract`.`number` =
+		#{number}
+	</select>
+
+</mapper>

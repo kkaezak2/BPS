@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+@font-face {
+	font-family: 'establishRetrosansOTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/establishRetrosansOTF.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	background-image: url("/resources/images/index5.png");
+	background-repeat: no-repeat;
+	background-position: center center; /* 이미지를 가로 및 세로 축 기준으로 정 가운데로 배치 */
+	background-attachment: fixed; /* 이미지를 스크롤에 고정시킵니다. */
+	background-color: #ffe03a;
+}
+
+:root {
+	--primary-color: #ffe03a;
+}
+/* 스타일을 적용할 요소에 변수 사용 */
+.form-floating label {
+	color: var(--primary-color);
+	color: var(--)
+}
+
+.btn-primary {
+	background-color: var(--primary-color);
+	opacity: 0.8;
+}
+
+.btn-outline-primary {
+	border-color: var(--primary-color);
+	color: var(--primary-color);
+}
+
+.btn:hover {
+	background-color: var(--primary-color);
+	color: #000000;
+}
+
+body {
+	font-family: 'establishRetrosansOTF', Arial, Helvetica, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 16px 20px;
+	/* font-size:20px; */
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	position: fixed;
+	bottom: 23px;
+	right: 28px;
+	width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	right: 15px;
+	border: 1px solid #e2e2e2;
+	z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+	max-width: 300px;
+	padding: 10px;
+	background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	border: none;
+	background: #e2e2e2;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus
+	{
+	background-color: #ffe03a;
+	outline: none;
+	opacity: 0.8;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+	background-color: #ffe03a;
+	color: #000000;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 10px;
+	opacity: 0.8;
+}
+
+.form-container .close {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 10px;
+	opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+	opacity: 1;
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}

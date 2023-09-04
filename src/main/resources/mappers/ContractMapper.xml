@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.ContractMapper">
+
+	<select id="selectOneByCustomer" parameterType="String"
+		resultType="CustomerDTO">
+		SELECT * FROM `customer`
+		WHERE `ssn` = #{ssn}
+	</select>
+
+	<select id="selectAllByCustomer" resultType="contractDTO">
+		SELECT * FROM `contract`
+		WHERE `ssn` = #{ssn}
+	</select>
+
+	<select id="selectOne" parameterType="int"
+		resultType="ContractDTO">
+		SELECT * FROM `contract`
+		WHERE `number` = #{number}
+	</select>
+
+
+	<!-- 종납일자/납입회차/상태 업데이트 -->
+	<update id="update" parameterType="contractDTO">
+		UPDATE contract
+		SET final_date = (SELECT MAX(paid_date)
+		FROM all_payment
+		WHERE all_payment.number = #{number}
+		AND all_payment.payment_status = '정상' ),
+
+		count = PERIOD_DIFF(EXTRACT(YEAR_MONTH FROM
+		(SELECT MAX(paid_date)
+		FROM all_payment
+		WHERE all_payment.number = #{number}
+		AND all_payment.payment_status = '정상')),
+		EXTRACT(YEAR_MONTH FROM date)) + 1, 
+		
+		status =
+		CASE
+		WHEN PERIOD_DIFF(EXTRACT(YEAR_MONTH FROM final_date), EXTRACT(YEAR_MONTH
+		FROM CURDATE())) &lt; -2 THEN '실효'
+		ELSE '정상'
+		END
+
+		WHERE contract.number = #{number}
+
+	</update>
+
+
+
+	<!-- 자동이체 납입방법 변경(AutoPayment)하면 Contract 납입방법에 반영 -->
+	<update id="updatePaymentMethod" parameterType="contractDTO">
+		UPDATE `contract`
+		SET `payment_method` = #{paymentMethod}
+		WHERE `number` = #{number} OR `ssn` = #{ssn}
+	</update>
+
+
+
+	<!-- 증서번호로 자동이체 최신1건만 조회하기 -->
+	<select id="selectOneCombined" resultType="ContractDTO">
+		SELECT c.number, c.product_name, c.premium, c.status,
+		a.payment_method, a.account_date, a.bank, a.account, a.modify_date, a.depositor,
+		a.account_option
+		FROM contract c
+		INNER JOIN auto_payment a ON c.number = a.number
+		WHERE c.number = #{number}
+		ORDER BY a.modify_date DESC
+		LIMIT 1;
+
+	</select>
+
+
+
+	<!-- 주민번호로 자동이체 최신내역 증서번호당 1건만 조회하기 -->
+	<select id="selectSsnOneCombined" parameterType="String"
+		resultType="ContractDTO">
+
+		SELECT c.number, c.product_name, c.premium, c.status, c.ssn,
+		a.payment_method, a.account_date, a.bank, a.account, a.ssn,
+		a.modify_date, a.depositor, a.account_option
+		FROM contract c
+		INNER JOIN auto_payment a ON c.ssn = a.ssn AND c.number = a.number
+		INNER JOIN (
+		SELECT number, MAX(modify_date) as MaxModifyDate
+		FROM auto_payment
+		GROUP BY number
+		) b ON a.number = b.number AND a.modify_date = b.MaxModifyDate
+		WHERE c.ssn = #{ssn}
+		ORDER BY c.number ASC;
+
+	</select>
+
+
+	<!-- 증서번호로 자동이체 내역 전체 조회하기 -->
+	<select id="selectcombined" parameterType="map"
+		resultType="ContractDTO">
+		SELECT c.number, c.product_name, c.premium, c.status,
+		a.payment_method, a.account_date, a.bank, a.account, a.modify_date, a.depositor,
+		a.account_option
+		FROM contract c
+		INNER JOIN auto_payment a ON c.number = a.number
+		WHERE c.number = #{number} AND (a.modify_date BETWEEN #{startDate} AND
+		DATE_ADD(#{endDate}, INTERVAL 1 DAY))
+		ORDER BY a.modify_date DESC
+
+	</select>
+
+	<!-- 주민번호로 자동이체 최신내역 전체 조회하기 -->
+	<select id="selectssncombined" parameterType="map"
+		resultType="ContractDTO">
+		SELECT c.number, c.product_name, c.premium, c.status, c.ssn,
+		a.payment_method, a.account_date, a.bank, a.account, a.ssn,
+		a.modify_date, a.depositor, a.account_option
+		FROM contract c
+		INNER JOIN auto_payment a ON c.ssn = a.ssn AND c.number = a.number
+		WHERE c.ssn = #{ssn} AND (a.modify_date BETWEEN #{startDate} AND
+		DATE_ADD(#{endDate}, INTERVAL 1 DAY))
+		ORDER BY `modify_date` DESC;
+	</select>
+
+
+</mapper>

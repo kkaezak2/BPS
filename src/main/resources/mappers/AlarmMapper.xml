@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.AlarmMapper">
+
+   <!-- new알람 -->
+   <insert id="insert" parameterType="AlarmDTO">
+      INSERT INTO
+      alarm(approver, date, apply_number, receiver, username, name)
+      VALUES
+      (#{approver},NOW(),#{applyNumber},#{receiver}, #{username}, #{name} )
+   </insert>
+
+	   <!-- 요청자 사번 -->
+   <select id="selectAlarm" parameterType="String"
+      resultType="alarmDTO">
+      SELECT * from alarm
+      WHERE username = #{username}
+      and checked = 1
+
+   </select>
+
+	<select id="selectAll" resultType="alarmDTO">
+		SELECT * from alarm
+	</select>
+
+	<update id="updateChecked" parameterType="AlarmDTO">
+		UPDATE `alarm`
+		SET
+		`checked` = #{checked}
+		WHERE `apply_number` = #{applyNumber}
+	</update>
+	
+</mapper>

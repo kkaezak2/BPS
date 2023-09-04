@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.mapper.RefundMapper">
+
+
+	<!-- 순정 -->
+	<insert id="insert" parameterType="arrayList"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `refund`(apply_number, all_payment_id, process_date,
+		username, name, team_name)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.applyNumber},#{item.allPaymentId}, NOW(), #{item.username},
+			#{item.name}, #{item.teamName})
+		</foreach>
+
+	</insert>
+
+	<select id="selectOne" resultType="refundDTO"
+		parameterType="int">
+		select `refund`.*,
+		`all_payment`.`number`,
+		`all_payment`.`paid_date`,
+		`all_payment`.`count`,
+		`contract`.`product_name`,
+		`contract`.`contractor`,
+		`contract`.`premium`
+		from
+		`refund`
+		inner join `all_payment`
+		on
+		`refund`.`all_payment_id` =
+		`all_payment`.`id`
+
+		inner join `contract`
+		on
+		`all_payment`.`number` =
+		`contract`.`number`
+		where `refund`.`apply_number` = #{applyNumber}
+		order by
+		`all_payment`.`paid_date`
+		desc
+	</select>
+
+	<select id="selectAll" resultType="refundDTO">
+		SELECT apply_number,
+		name,
+		username,
+		process_date,
+		status,
+		team_name
+		FROM refund
+		WHERE status = '결재요청'
+		GROUP BY apply_number
+	</select>
+
+
+	<select id="maxApplyNumber" resultType="int">
+		SELECT IFNULL(MAX(apply_number), 10000) FROM `refund`
+	</select>
+
+
+
+	<update id="updateConfirm" parameterType="refundDTO">
+		UPDATE `refund`
+		SET
+		`status` = #{status},
+		`approver` = #{approver},
+		`username2` = #{username2},
+		`approval_date` = NOW()
+		WHERE `apply_number` = #{applyNumber}
+	</update>
+
+
+	<!-- 반송결재내역 조회 : 결재완료건 리스트 -->
+	<select id="confirmDone" resultType="refundDTO">
+		SELECT apply_number,
+		name,
+		username,
+		process_date,
+		status,
+		team_name,
+		approver
+		FROM refund
+		WHERE status = '결재완료' or status = '반려' 
+		GROUP BY apply_number
+	</select>
+
+
+	<!-- 반송 반려 -->
+	<update id="updateReject" parameterType="refundDTO">
+		UPDATE `refund`
+		SET
+		`status` = #{status},
+		`approver` = #{approver},
+		`username2` = #{username2},
+		`approval_date` = NOW()
+		WHERE `apply_number` = #{applyNumber}
+	</update>
+
+	<!-- 상신 취소 -->
+	<update id="updateCancel" parameterType="refundDTO">
+		UPDATE `refund`
+		SET
+		`status` = #{status}
+		WHERE `apply_number` = #{applyNumber}
+	</update>
+
+
+ <!-- 반송처리 결재요청시 중복체크 -->
+    <select id="refundCheck" parameterType="int" resultType="int">
+       SELECT COUNT(all_payment_id) FROM refund
+       WHERE all_payment_id = #{allPaymentId}  and status = '결재요청'   
+    </select>
+
+
+
+</mapper> 

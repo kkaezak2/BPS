@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans
+   xmlns="http://www.springframework.org/schema/mvc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+   <!-- 우리 프로젝트에서 스프링 객체관리 등은 @어노테이션을 통해 이루어진다. -->
+   <annotation-driven />
+   
+   <!-- CSS파일 등의 자원들이 어디에 있는지 지정하여 스프링 맵핑을 하지 않아도 되게 만들어준다. -->
+   <resources mapping="/resources/**" location="/resources/" />
+   
+   
+   <!-- 이걸하면 getMapping안해도 됨 -->
+	<resources mapping="/upload/**" location="/upload/" />
+	<resources mapping="/favicon.ico" location="/upload/" />
+	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"/>
+	
+	
+
+   <!-- 개별 페이지의 저장된 폴더 위치와 파일 확장자명을 지정해준다. -->
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="prefix" value="/WEB-INF/views/" />
+      <beans:property name="suffix" value=".jsp" />
+   </beans:bean>
+   
+   
+   
+	<!-- 이걸하면 getMapping안해도 됨 -->
+	<resources mapping="/upload/**" location="/upload/" />
+   
+   	<!-- 개별 페이지의 저장된 폴더 위치와 파일 확장자명을 지정해준다. -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+   
+   <!-- multipart파일 업로드 설정을 위한 리졸버. -->
+   <beans:bean id="multipartResolver" 
+   class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   <beans:property name="defaultEncoding" value="utf-8" />
+      <beans:property name="maxUploadSize" value="20000000" />
+
+   </beans:bean>   
+   
+   
+   <!-- 컨트롤러 클래스가 저장된 위치 -->
+   <context:component-scan base-package="com.bit.controller" />
+   
+   </beans:beans>

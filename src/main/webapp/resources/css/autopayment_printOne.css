@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+link[rel="icon"] {
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+body .form-select:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .form-control:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+
+body .check-input:checked {
+	background-color: #000000;
+	border-color: #ffe03a;
+}
+body .form-check-radio:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
+body .form-check-radio:checked {
+	background-color: #000000;
+	width:auto;
+}
+
+
+div.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	background-color: #ffffff;
+}
+
+#ssn, #startDate, #endDate, #contract_number {
+	width: auto;
+}
+
+.customer_name {
+	margin: auto;
+}
+
+.selectedDiv {
+	margin-top: 0px;
+	margin-bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.content_header {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+
+
+#div_status, #div_status2 {
+	padding-top: 12px;
+	background-color: #ffe03a;
+}
+#row_search_number {
+	background-color: #ffe03a;
+}
+
+/* 스크롤관련 시작 */
+body {
+	overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px #e2e2e2;;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	height: 20%;
+	background: #ffe03a;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #fded96;
+}
+/* 스크롤관련 끝 */
+#div_body {
+	padding-left: 16px;
+	padding-right: 16px;
+	max-width: 100%;
+}
+
+#div_customerReport {
+	height: 48px;
+	margin-bottom: 0px;
+}
+
+#icon_mailtocustomer {
+	color: #ffffff;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+.combined-scroll{
+	max-height: 500px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+
+
+.form-check-input:checked {
+    background-color: black;
+    border-color: #ffe03a;
+}
+
+
+body .form-check-input:focus {
+	border-color: #000000;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(255, 224, 58, 0.25);
+}
